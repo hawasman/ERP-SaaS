@@ -1,5 +1,4 @@
 import { ArrowUpDown, MoreVertical, Plus, Search } from "lucide-react";
-import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import {
@@ -87,7 +86,7 @@ export default function FinancePage() {
       <Card className="p-6">
         <h3 className="font-semibold mb-4">Expense Breakdown</h3>
         <div className="h-[300px]">
-          <ResponsiveContainer width="100%" height="100%">
+          {/* <ResponsiveContainer width="100%" height="100%">
             <BarChart data={expenseData}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="category" />
@@ -95,7 +94,7 @@ export default function FinancePage() {
               <Tooltip />
               <Bar dataKey="amount" fill="hsl(var(--primary))" />
             </BarChart>
-          </ResponsiveContainer>
+          </ResponsiveContainer> */}
         </div>
       </Card>
 

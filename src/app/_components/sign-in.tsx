@@ -148,7 +148,7 @@ export default function SignIn() {
             <CardFooter>
                 <div className="flex justify-center w-full border-t py-4">
                     <p className="text-center text-sm text-neutral-500">
-                        Don't have an account?<br />
+                        Do&apos;t have an account?<br />
                         <Link
                             href="/sign-up"
                             className="underline"
