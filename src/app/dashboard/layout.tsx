@@ -1,4 +1,5 @@
 import { type Metadata } from "next";
+import DashboardLayoutComnponent from "../_components/dashboard/layout-component";
 
 export const metadata: Metadata = {
     title: "Dashboard",
@@ -10,8 +11,6 @@ export default function RootLayout({
     children,
 }: Readonly<{ children: React.ReactNode }>) {
     return (
-        <div className="flex gap-4">
-            {children}
-        </div>
-    );
+        <DashboardLayoutComnponent>{children}</DashboardLayoutComnponent>
+    )
 }
