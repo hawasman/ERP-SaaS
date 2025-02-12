@@ -96,9 +96,10 @@ export function NavUser() {
                             </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem onClick={async () => {
-                            await signOut()
-                            redirect("/")
+                        <DropdownMenuItem onClick={() => {
+                            signOut().then(() => {
+                                redirect("/")
+                            })
                         }}>
                             <LogOut />
                             Log out
