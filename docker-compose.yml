@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres
+    restart: always
+    container_name: erp-saas-postgres
+    shm_size: 128mb
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 3tExHXzG_Qid6nWX
+      POSTGRES_DB: erp-saas
+    ports:
+      - 5432:5432
+
+  adminer:
+    image: adminer
+    restart: always
+    container_name: erp-saas-adminer
+    ports:
+      - 8080:8080
