@@ -178,6 +178,7 @@ function AddEmployeeDialog({ onSuccess, onError }: { onSuccess: () => void, onEr
 export default function EmployeesPage() {
   const [search, setSearch] = useState("");
   const router = useRouter();
+  const utils = api.useUtils();
   const [employees] = api.Employee.getAll.useSuspenseQuery();
   const { isOpen, toggleModal, data, setData } = useViewEmployeeDialogState();
 
@@ -187,7 +188,7 @@ export default function EmployeesPage() {
     <div className="space-y-6">
       <div className="flex justify-between items-center ">
         <h2 className="text-3xl font-bold">Employees</h2>
-        <AddEmployeeDialog onSuccess={() => console.log('success')} onError={() => console.log('success')} />
+        <AddEmployeeDialog onSuccess={() => utils.Employee.invalidate()} onError={() => console.log('success')} />
       </div>
 
       <Card className="p-6">

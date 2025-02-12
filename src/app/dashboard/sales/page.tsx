@@ -1,5 +1,5 @@
 import { ArrowUpDown, MoreVertical, Plus, Search } from "lucide-react";
-import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import {
@@ -80,7 +80,21 @@ export default function SalesPage() {
                 <h3 className="font-semibold mb-4">Sales Overview</h3>
                 <div className="h-[300px]">
                     <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={salesData}>
+                        <LineChart width={500}
+                            height={300}
+                            data={salesData}
+                            margin={{
+                                top: 5,
+                                right: 30,
+                                left: 20,
+                                bottom: 5,
+                            }}
+                        >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="name" />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="month" />
                             <YAxis />

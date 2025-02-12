@@ -2,6 +2,7 @@
 
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { useState } from "react";
 import { signIn } from "~/client/auth-client";
 import { Button } from "~/components/ui/button";
@@ -14,8 +15,9 @@ import { cn } from "~/lib/utils";
 export default function SignIn() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [loading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [rememberMe, setRememberMe] = useState(false);
+    const [error, setError] = useState("");
 
     return (
         <Card className="max-w-md">
@@ -26,6 +28,7 @@ export default function SignIn() {
                 </CardDescription>
             </CardHeader>
             <CardContent>
+
                 <div className="grid gap-4">
                     <div className="grid gap-2">
                         <Label htmlFor="email">Email</Label>
@@ -72,14 +75,31 @@ export default function SignIn() {
                         <Label htmlFor="remember">Remember me</Label>
                     </div>
 
-
+                    {error !== "" && (
+                        <div className="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                            <svg className="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                            </svg>
+                            <span className="sr-only">Danger</span>
+                            <div>
+                                <span className="font-medium">{error}</span>
+                            </div>
+                        </div>
+                    )}
 
                     <Button
                         type="submit"
                         className="w-full"
                         disabled={loading}
                         onClick={async () => {
-                            await signIn.email({ email, password });
+                            setLoading(true);
+                            const result = await signIn.email({ email, password });
+                            if (!result.error) {
+                                redirect("/dashboard");
+                                return;
+                            }
+                            setError(result.error.message ?? "");
+                            setLoading(false);
                         }}
                     >
                         {loading ? (
@@ -88,7 +108,6 @@ export default function SignIn() {
                             "Login"
                         )}
                     </Button>
-
 
 
                     <div className={cn(
@@ -101,6 +120,7 @@ export default function SignIn() {
                                 "w-full gap-2"
                             )}
                             onClick={async () => {
+                                setLoading(true);
                                 await signIn.social({
                                     provider: "github",
                                     callbackURL: "/dashboard"
@@ -122,17 +142,18 @@ export default function SignIn() {
                         </Button>
                     </div>
                 </div>
+
+
             </CardContent>
             <CardFooter>
                 <div className="flex justify-center w-full border-t py-4">
-                    <p className="text-center text-xs text-neutral-500">
-                        Powered by{" "}
+                    <p className="text-center text-sm text-neutral-500">
+                        Don't have an account?<br />
                         <Link
-                            href="https://better-auth.com"
+                            href="/sign-up"
                             className="underline"
-                            target="_blank"
                         >
-                            <span className="dark:text-orange-200/90">better-auth.</span>
+                            <span className="dark:text-orange-200/90">Sign up.</span>
                         </Link>
                     </p>
                 </div>
