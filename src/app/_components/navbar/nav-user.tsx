@@ -99,6 +99,8 @@ export function NavUser() {
                         <DropdownMenuItem onClick={() => {
                             signOut().then(() => {
                                 redirect("/")
+                            }).catch(() => {
+                                //ts-ignore
                             })
                         }}>
                             <LogOut />
