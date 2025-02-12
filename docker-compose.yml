@@ -12,10 +12,19 @@ services:
       POSTGRES_DB: erp-saas
     ports:
       - 5432:5432
+    networks:
+      - db
 
   adminer:
     image: adminer
     restart: always
     container_name: erp-saas-adminer
+    depends_on:
+      - db
     ports:
       - 8080:8080
+    networks:
+      - db
+
+networks:
+  db:
