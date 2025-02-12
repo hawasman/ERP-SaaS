@@ -1,6 +1,10 @@
 {
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "workbench.editor.customLabels.patterns": {
+    "**/**.ts": "${dirname}/${filename}", // route.ts
+    "**/**.tsx": "${dirname}/${filename}" // layout.tsx, page.tsx, template.tsx
+  },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "always",
     "source.organizeImports": "always",

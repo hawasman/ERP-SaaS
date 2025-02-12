@@ -1,5 +1,6 @@
 import { headers } from "next/headers"
 import { auth } from "~/server/auth"
+import { DashboardIndex } from "../_components/dashboard-index"
 
 export default async function DashboardPage() {
     const session = await auth.api.getSession({
@@ -9,8 +10,6 @@ export default async function DashboardPage() {
         return <div>Not authenticated</div>
     }
     return (
-        <div>
-            <h1>Welcome {session.user.name}</h1>
-        </div>
+        <DashboardIndex />
     )
 }
