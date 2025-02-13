@@ -2,6 +2,7 @@
 import { Archive, CheckCircle, Globe, Headset, Landmark, Medal, Rocket, Users } from "lucide-react";
 import Link from "next/link";
 import { HydrateClient } from "~/trpc/server";
+import PaymentDialog from "./_components/payments/payment-dialog";
 
 export default async function Home() {
   return (
@@ -117,9 +118,7 @@ export default async function Home() {
                     Standard support
                   </li>
                 </ul>
-                <button className="w-full bg-blue-500 text-white py-3 rounded-full hover:bg-blue-600 transition-all">
-                  Get Started
-                </button>
+                <PaymentDialog tier="basic" text="Get Started" />
               </div>
 
               <div className="border rounded-2xl p-8 bg-blue-50 hover:shadow-lg transition-all relative">
@@ -152,9 +151,7 @@ export default async function Home() {
                     Financial analytics
                   </li>
                 </ul>
-                <button className="w-full bg-blue-500 text-white py-3 rounded-full hover:bg-blue-600 transition-all">
-                  Get Started
-                </button>
+                <PaymentDialog tier="pro" text="Get Started" />
               </div>
 
               <div className="border rounded-2xl p-8 hover:shadow-lg transition-all">
