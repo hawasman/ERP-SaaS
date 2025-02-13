@@ -47,7 +47,7 @@ export const projectMembers = createTable("project_members", {
   ...hasOrganization,
 });
 
-export const projectItems = createTable("project_items", {
+export const projectTasks = createTable("project_Tasks", {
   id: serial("id").primaryKey(),
   projectId: integer("project_id")
     .references(() => projects.id)
@@ -55,7 +55,7 @@ export const projectItems = createTable("project_items", {
   name: varchar("name", { length: 256 }).notNull(),
   userId: text("user_id"),
   description: varchar("description", { length: 256 }),
-  status: projectStatus("project_item_status").default("Created"),
+  status: projectStatus("project_Task_status").default("Created"),
   startDate: timestamp("start_date", { withTimezone: true }),
   endDate: timestamp("end_date", { withTimezone: true }),
   ...timestamps,
@@ -65,7 +65,7 @@ export const projectItems = createTable("project_items", {
 
 export const projectRelations = relations(projects, ({ many }) => ({
   projectMembers: many(projectMembers),
-  projectItems: many(projectItems),
+  projectTasks: many(projectTasks),
 }));
 
 export const projectMembersRelations = relations(projectMembers, ({ one }) => ({
@@ -79,13 +79,13 @@ export const projectMembersRelations = relations(projectMembers, ({ one }) => ({
   }),
 }));
 
-export const projectItemsRelations = relations(projectItems, ({ one }) => ({
+export const projectTasksRelations = relations(projectTasks, ({ one }) => ({
   project: one(projects, {
-    fields: [projectItems.projectId],
+    fields: [projectTasks.projectId],
     references: [projects.id],
   }),
   user: one(user, {
-    fields: [projectItems.userId],
+    fields: [projectTasks.userId],
     references: [user.id],
   }),
 }));

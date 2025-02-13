@@ -1,5 +1,7 @@
+import { activityLog } from "./activity-log";
 import {
   account,
+  organization,
   session,
   user,
   userRelations,
@@ -11,10 +13,10 @@ import { employees } from "./employees";
 import { orderItemRelations, orderRelations, orders } from "./orders";
 import { productRelations, products } from "./products";
 import {
-  projectItemsRelations,
   projectMembersRelations,
   projectRelations,
   projects,
+  projectTasksRelations,
 } from "./projects";
 import { sales, salesRelations } from "./sales";
 import { transactions } from "./transactions";
@@ -32,6 +34,8 @@ export const Schema = {
   session,
   account,
   verification,
+  organization,
+  activityLog,
 };
 
 export const SchemaRelations = {
@@ -41,7 +45,7 @@ export const SchemaRelations = {
   productRelations,
   projectRelations,
   projectMembersRelations,
-  projectItemsRelations,
+  projectTasksRelations,
   salesRelations,
   userRelations,
 };

@@ -1,13 +1,14 @@
 
 import { Archive, CheckCircle, Globe, Headset, Landmark, Medal, Rocket, Users } from "lucide-react";
-import Link from "next/link";
 import { HydrateClient } from "~/trpc/server";
+import { NavUser } from "./_components/navbar/nav-user";
 import PaymentDialog from "./_components/payments/payment-dialog";
+import { ToggleTheme } from "./_components/toggle-theme";
 
 export default async function Home() {
   return (
     <HydrateClient>
-      <div className="min-h-screen min-w-screen bg-slate-50">
+      <div className="min-h-screen min-w-screen max-w-screen bg-slate-50">
         <div className=" bg-white">
           <nav className="flex items-center justify-between py-6 px-8 border-b">
             <div className="flex items-center gap-2">
@@ -24,9 +25,10 @@ export default async function Home() {
               <a className="hover:underline transition-all" href="#about">
                 About
               </a>
-              <Link href={"/sign-in"} className="bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition-all">
-                Get Started
-              </Link>
+            </div>
+            <div className="flex items-center gap-4">
+              <NavUser compact />
+              <ToggleTheme />
             </div>
           </nav>
 

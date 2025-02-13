@@ -1,5 +1,7 @@
 import { relations } from "drizzle-orm";
-import { boolean, text, timestamp } from "drizzle-orm/pg-core";
+import { boolean, text, timestamp, varchar } from "drizzle-orm/pg-core";
+import { createInsertSchema, createSelectSchema } from "drizzle-zod";
+import { z } from "zod";
 import { createTable } from "../columns.helpers";
 import { projectMembers } from "./projects";
 
@@ -61,6 +63,11 @@ export const organization = createTable("organization", {
   logo: text("logo"),
   createdAt: timestamp("created_at").notNull(),
   metadata: text("metadata"),
+  stripeCustomerId: text("stripe_customer_id").unique(),
+  stripeSubscriptionId: text("stripe_subscription_id").unique(),
+  stripeProductId: text("stripe_product_id"),
+  planName: varchar("plan_name", { length: 50 }),
+  subscriptionStatus: varchar("subscription_status", { length: 20 }),
 });
 
 export const member = createTable("member", {
@@ -92,3 +99,15 @@ export const invitation = createTable("invitation", {
 export const userRelations = relations(user, ({ many }) => ({
   projectMembers: many(projectMembers),
 }));
+
+export const OrganizationSelectSchema = createSelectSchema(organization);
+export const OrganizationInsertSchema = createInsertSchema(organization);
+export type OrganizationType = z.infer<typeof OrganizationSelectSchema>;
+
+export const memberSelectSchema = createSelectSchema(member);
+export const memberInsertSchema = createInsertSchema(member);
+export type memberType = z.infer<typeof memberSelectSchema>;
+
+export type OrgWithMember = z.infer<typeof OrganizationSelectSchema> & {
+  members: memberType[];
+};
